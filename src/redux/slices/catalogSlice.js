@@ -1,18 +1,19 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-export const axiosCatalog = createAsyncThunk(
-    'catalog/axiosCatalogStatus',
-    async () => {
-        const { data } = await axios.get('https://api.escuelajs.co/api/v1/users');
-        return data;
-    }
-);
 const initialState = {
     items: [],
     isLoading: false,
     loading: 'loading' | 'fulfilled' | 'error'
 };
+
+export const axiosCatalog = createAsyncThunk(
+    'catalog/axiosCatalogStatus',
+    async () => {
+        const { data } = await axios.get(`https://api.escuelajs.co/api/v1/users/?role=admin`);
+        return data;
+    }
+);
 
 const catalogSlice = createSlice({
     name: 'catalog',
