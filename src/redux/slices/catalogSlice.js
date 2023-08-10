@@ -9,8 +9,9 @@ const initialState = {
 
 export const axiosCatalog = createAsyncThunk(
     'catalog/axiosCatalogStatus',
-    async () => {
-        const { data } = await axios.get(`https://api.escuelajs.co/api/v1/users/?role=admin`);
+    async (params) => {
+        const { searchValue } = params;
+        const { data } = await axios.get(`https://api.escuelajs.co/api/v1/products/?title=${searchValue}`);
         return data;
     }
 );

@@ -1,18 +1,18 @@
 import React, { useEffect } from 'react';
 import styles from './Catalog.module.scss';
 
-const Catalog = ({ id, role, authorName, email, createAt, avatar}) => {
+const Catalog = ({ id, title, price, description, time}) => {
             return (
               <div className={styles.parent}>
                 <div className={styles.catalog}> 
                   <div className='block_reactImg'>
-                    <img className={styles.imgAvatar} src={avatar}/>
+                    <img className={styles.imgAvatar} src=''/>
                   </div> 
                   <div className={styles.blockDescription}>
-                      <h3>{role}</h3>
-                      <span>{authorName}</span>
-                      <span>{email}</span>
-                      <span>{createAt}</span>              
+                      <h3>{title}</h3>
+                      <span>{title}</span>
+                      <span>{price}</span>
+                      <span>{description}</span>              
                   </div>          
                   <div className={styles.bigBlockStars}>
                     <div className={styles.blockStars}>
@@ -29,7 +29,7 @@ const Catalog = ({ id, role, authorName, email, createAt, avatar}) => {
                       />
                       </svg> 
                       <span>
-                        <b>{id}</b>
+                        <b>{time}</b>
                         stars
                       </span>
                       </div>
@@ -44,7 +44,7 @@ const Catalog = ({ id, role, authorName, email, createAt, avatar}) => {
                       <path d="M0.847282 23.4511H23.1527C23.6256 23.4511 24 23.0914 24 22.6371C24 18.3782 20.3941 14.8953 15.9409 14.8953H8.05912C3.62562 14.8953 0 18.3592 0 22.6371C0 23.0914 0.374378 23.4511 0.847282 23.4511ZM8.05912 16.5231H15.9409C19.1724 16.5231 21.8325 18.8325 22.2463 21.8232H1.75369C2.16747 18.8514 4.8276 16.5231 8.05912 16.5231Z" fill="#6E798C"/>
                       </svg>
                       <span>                     
-                        <b>{id}</b>
+                        <b>{time}</b>
                         watchers
                       </span>
                       </div>

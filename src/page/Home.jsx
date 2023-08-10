@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { axiosCatalog } from '../redux/slices/catalogSlice';
 import { setSearchValue } from '../redux/slices/searchSlice';
@@ -9,30 +9,34 @@ import styles from '../scss/.app.scss';
 
 const Home = () => {
     const dispatch = useDispatch();
-    const { items, isLoading, searchValue } = useSelector((state) => state.catalog);
-    const inputRef = useRef();
-     
+    const { items, isLoading } = useSelector((state) => state.catalog);
+    const searchValue = useSelector((state) => state.search.searchValue);
+    const [value, setValue] = useState('');
+
     useEffect(() => {
-        dispatch(axiosCatalog());
-      }, []); 
+        dispatch(axiosCatalog({
+          searchValue
+        }));
+      }, [searchValue]); 
      
     const updateSearchValue = useCallback(
-        debounce(() => dispatch(axiosCatalog())
+        debounce((str) => {
+          dispatch(setSearchValue(str))
+        },
     ), []); 
   
     const onChangeInput = (event) => {
-       dispatch(setSearchValue(event.target.value));
-        updateSearchValue(event.target.value); 
+       setValue(event.target.value);
+       updateSearchValue(event.target.value); 
     }; 
-    
+
     return (
          <div className='container'>
              <header>
           <div className={styles.container}>
           <div className={styles.search}>
             <input
-              ref={inputRef}
-              value={searchValue}
+              value={value}
               onChange={onChangeInput}
               placeholder='Search'
               className={styles.input}/>
@@ -43,11 +47,10 @@ const Home = () => {
             items?.map((obj) => <Catalog
             key={obj.id}
             id={obj.id}
-            role={obj.role}
-            authorName={obj.name}
-            email={obj.email}
-            createAt={obj.creationAt}
-            // avatar={obj.avatar}
+            title={obj.title}
+            price={obj.price}
+            description={obj.description}
+            time={obj.updatedAt}
             />))}
             </div>
     );
