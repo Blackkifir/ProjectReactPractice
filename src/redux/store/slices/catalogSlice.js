@@ -10,7 +10,7 @@ const initialState = {
 export const axiosCatalog = createAsyncThunk(
     'catalog/axiosCatalogStatus',
     async (params) => {
-        const { searchValue } = params;
+        const { searchValue } = params
         const { data } = await axios.get(`https://api.escuelajs.co/api/v1/products/?title=${searchValue}`);
         return data;
     }
@@ -23,6 +23,10 @@ const catalogSlice = createSlice({
         setItems(state, action) {
             state.items = action.payload;
         },
+        setCurrentPages(state, action) {
+            // state.currentPage = action.payload;
+            console.log(action);
+        }
     },
     extraReducers: (builder) => {
         builder.addCase(axiosCatalog.pending, (state) => {
@@ -45,5 +49,5 @@ const catalogSlice = createSlice({
 
 
 
-export const { setItems } = catalogSlice.actions;
+export const { setItems, setCurrentPages } = catalogSlice.actions;
 export default catalogSlice.reducer;

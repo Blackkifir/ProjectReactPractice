@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import styles from './Catalog.module.scss';
+import imageReact from '../../assets/img/reactImage.svg'; 
 
-const Catalog = ({ id, title, price, description, time}) => {
+const Catalog = ({ id, title, price, description, time, images}) => {
             return (
               <div className={styles.parent}>
                 <div className={styles.catalog}> 
                   <div className='block_reactImg'>
-                    <img className={styles.imgAvatar} src=''/>
+                    <img className={styles.imgAvatar} src={imageReact}/>
                   </div> 
                   <div className={styles.blockDescription}>
                       <h3>{title}</h3>
