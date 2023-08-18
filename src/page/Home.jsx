@@ -1,28 +1,37 @@
+
 import React, { useCallback, useEffect, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { axiosCatalog, setCurrentPages } from '../redux/store/slices/catalogSlice';
-import { setSearchValue } from '../redux/store/slices/searchSlice';
-// import { setCurrentPages  }  from '../redux/store/slices/paginationSlice';
+import { axiosCatalog, setPage, setSearchValue } from '../redux/store/slices/catalogSlice';
 
 import Pagination from '../components/Pagination/Pagination';
 import Catalog from '../components/Catalog/Catalog';
+import Loader from '../components/Loader/Loader';
 import debounce from '../helpers/debounce'; 
 import styles from '../scss/.app.scss';
 
+
 const Home = () => {
+    //redux
     const dispatch = useDispatch();
-    const { items, isLoading } = useSelector((state) => state.catalog);
-    const searchValue = useSelector((state) => state.search.searchValue);
+    const { items, isLoading, searchValue, page, contentPerPage } = useSelector((state) => state.catalog);
     const [value, setValue] = useState('');
-    // const currentPage = useSelector((state) => state.pagination.currentPage);z
+
+    //pagination
+    const totalPages = Math.ceil(items.length / contentPerPage);
+    const lastContentIndex = page * contentPerPage;
+    const firstContentIndex = lastContentIndex - contentPerPage;
+    
 
     useEffect(() => {
+        
         dispatch(axiosCatalog({
-          searchValue
+          searchValue,
+          page
         }));
-      }, [searchValue]); 
+      }, [dispatch, searchValue, page ]); 
 
+    /* eslint-disable react-hooks/exhaustive-deps */
     const updateSearchValue = useCallback(
         debounce((str) => {
           dispatch(setSearchValue(str))
@@ -33,11 +42,20 @@ const Home = () => {
        setValue(event.target.value);
        updateSearchValue(event.target.value); 
     }; 
-    
-    const onChangePage = (page) => {
-      dispatch(setCurrentPages(page)); 
-      console.log(page)
-    };
+
+    const changePage = (page) => {
+      if (page < 1) {
+        dispatch(setPage(totalPages));
+      }
+      else if (page > totalPages) {
+        dispatch(setPage(1));
+      }
+      else {
+        dispatch(setPage(page));
+      }
+   }
+
+   
 
     return (
          <div className='container'>
@@ -52,8 +70,10 @@ const Home = () => {
           </div>
           </div>
           </header>
-            {!isLoading && ( 
-            items?.map((obj) => <Catalog
+            
+            {isLoading ? <Loader/> : ( 
+            items.slice(firstContentIndex, lastContentIndex)
+                 .map((obj) => <Catalog
             key={obj.id}
             id={obj.id}
             title={obj.title}
@@ -62,7 +82,7 @@ const Home = () => {
             time={obj.updatedAt}
             images={obj.images}
             />))}
-            <Pagination onChangePage={onChangePage}/>
+            {!isLoading && <Pagination changePage={changePage} totalPages={totalPages}/>}
             </div>
     );
 };
