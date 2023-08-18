@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styles from './Catalog.module.scss';
 import imageReact from '../../assets/img/reactImage.svg'; 
 
-const Catalog = ({ id, title, price, description, time, images}) => {
+const Catalog = ({ title, price, description, time, images}) => {
             return (
               <div className={styles.parent}>
                 <div className={styles.catalog}> 

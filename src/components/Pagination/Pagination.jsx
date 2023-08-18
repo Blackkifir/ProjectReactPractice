@@ -6,8 +6,6 @@ import styles from './Pagination.module.scss';
 const Pagination = ({changePage, totalPages}) => {
 const { page } = useSelector((state) => state.catalog);
 
-
-
   return (
    <nav>
      <div className={styles.paginationBlock}>

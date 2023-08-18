@@ -3,12 +3,11 @@ import React, { useCallback, useEffect, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { axiosCatalog, setPage, setSearchValue } from '../redux/store/slices/catalogSlice';
-
+import Search from '../components/Search/Search';
 import Pagination from '../components/Pagination/Pagination';
 import Catalog from '../components/Catalog/Catalog';
 import Loader from '../components/Loader/Loader';
 import debounce from '../helpers/debounce'; 
-import styles from '../scss/.app.scss';
 
 
 const Home = () => {
@@ -22,9 +21,7 @@ const Home = () => {
     const lastContentIndex = page * contentPerPage;
     const firstContentIndex = lastContentIndex - contentPerPage;
     
-
     useEffect(() => {
-        
         dispatch(axiosCatalog({
           searchValue,
           page
@@ -55,22 +52,12 @@ const Home = () => {
       }
    }
 
-   
-
     return (
-         <div className='container'>
-             <header>
-          <div className={styles.container}>
-          <div className={styles.search}>
-            <input
-              value={value}
-              onChange={onChangeInput}
-              placeholder='Search'
-              className={styles.input}/>
-          </div>
-          </div>
-          </header>
-            
+<div className='container'>   
+            <Search 
+            onChangeInput={onChangeInput}
+            value={value}
+            />
             {isLoading ? <Loader/> : ( 
             items.slice(firstContentIndex, lastContentIndex)
                  .map((obj) => <Catalog
@@ -83,7 +70,7 @@ const Home = () => {
             images={obj.images}
             />))}
             {!isLoading && <Pagination changePage={changePage} totalPages={totalPages}/>}
-            </div>
+</div>
     );
 };
 
