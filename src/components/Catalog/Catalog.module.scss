@@ -1,10 +1,17 @@
 .parent {
     display: flex;
     align-items: center;
+    justify-content: center;
     height: 224px;
     margin: 0 auto;
-    width: 1340px;
-    padding: 40px 32px 40px 40px;
+    width: 1308px;
+    margin-top: 40px;
+    background-color: #dedede;
+    border-radius: 10px;
+
+    &:last-child {
+        margin-bottom: 40px;
+    }
 
     .catalog {
         display: flex;

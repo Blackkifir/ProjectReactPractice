@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Catalog.module.scss';
 import imageReact from '../../assets/img/reactImage.svg'; 
 
-const Catalog = ({ title, price, description, time, images}) => {
+const Catalog = ({ title, price, description, time }) => {
             return (
               <div className={styles.parent}>
                 <div className={styles.catalog}> 

@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { axiosCatalog, setPage, setSearchValue } from '../redux/store/slices/catalogSlice';
+
 import Search from '../components/Search/Search';
 import Pagination from '../components/Pagination/Pagination';
 import Catalog from '../components/Catalog/Catalog';
@@ -40,9 +41,9 @@ const Home = () => {
        updateSearchValue(event.target.value); 
     }; 
 
-    const clickClose = (event) => {
+    const clickClose = () => {
+       dispatch(setSearchValue(''));
        setValue('');
-       updateSearchValue(event.target.value); 
     };
 
     const changePage = (page) => {
@@ -67,7 +68,7 @@ const Home = () => {
             {!isLoading && items.length === 0 && 
               <NotFound/>
             }
-            {isLoading && items.length > 0 ? <Loader/> : ( 
+            {isLoading ? <Loader/> : ( 
             items.slice(firstContentIndex, lastContentIndex)
                  .map((obj) => <Catalog
             key={obj.id}

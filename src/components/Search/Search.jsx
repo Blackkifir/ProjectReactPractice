@@ -3,6 +3,7 @@ import styles from './Search.module.scss';
 
 const Search = ({onChangeInput, value, clickClose}) => {
 
+
     return (
 <>
         <header>
@@ -13,9 +14,11 @@ const Search = ({onChangeInput, value, clickClose}) => {
          onChange={onChangeInput}
          placeholder='Search'
          className={styles.input}/>
-        <button
-        onClick={clickClose}
-        className={styles.close}>&times;</button>
+         {value && 
+           <button
+           onClick={clickClose}
+           className={styles.close}>&times; 
+         </button>}
      </div>
      </div>
      </header>
