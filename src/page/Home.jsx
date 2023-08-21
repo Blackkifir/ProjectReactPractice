@@ -8,7 +8,7 @@ import Pagination from '../components/Pagination/Pagination';
 import Catalog from '../components/Catalog/Catalog';
 import Loader from '../components/Loader/Loader';
 import debounce from '../helpers/debounce'; 
-
+import NotFound from '../components/NotFound/NotFound';
 
 const Home = () => {
     //redux
@@ -26,7 +26,7 @@ const Home = () => {
           searchValue,
           page
         }));
-      }, [dispatch, searchValue, page ]); 
+      }, [dispatch, searchValue, page]); 
 
     /* eslint-disable react-hooks/exhaustive-deps */
     const updateSearchValue = useCallback(
@@ -40,6 +40,11 @@ const Home = () => {
        updateSearchValue(event.target.value); 
     }; 
 
+    const clickClose = (event) => {
+       setValue('');
+       updateSearchValue(event.target.value); 
+    };
+
     const changePage = (page) => {
       if (page < 1) {
         dispatch(setPage(totalPages));
@@ -50,15 +55,19 @@ const Home = () => {
       else {
         dispatch(setPage(page));
       }
-   }
+   }; 
 
     return (
 <div className='container'>   
             <Search 
             onChangeInput={onChangeInput}
             value={value}
+            clickClose={clickClose}
             />
-            {isLoading ? <Loader/> : ( 
+            {!isLoading && items.length === 0 && 
+              <NotFound/>
+            }
+            {isLoading && items.length > 0 ? <Loader/> : ( 
             items.slice(firstContentIndex, lastContentIndex)
                  .map((obj) => <Catalog
             key={obj.id}
@@ -69,7 +78,8 @@ const Home = () => {
             time={obj.updatedAt}
             images={obj.images}
             />))}
-            {!isLoading && <Pagination changePage={changePage} totalPages={totalPages}/>}
+            {items.length === 0 ? 
+            !isLoading : <Pagination value={page} changePage={changePage} totalPages={totalPages}/>}
 </div>
     );
 };

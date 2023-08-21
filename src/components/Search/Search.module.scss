@@ -1,7 +1,11 @@
 @import '../../scss/_variables';
 
+.search {
+    position: relative;
+}
+
 input {
-    max-width: 1284px;
+    max-width: 1308px;
     width: 100%;
     height: 56px;
     box-shadow: 0px 3px 7px 0px rgba(0, 0, 0, 0.7);
@@ -18,4 +22,17 @@ input {
         font-size: 16px;
         line-height: 24px;
     }
+}
+
+
+.close {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    bottom: 0;
+    font-size: 45px;
+    border: none;
+    background-color: transparent;
+    color: #808080;
+    cursor: pointer;
 }

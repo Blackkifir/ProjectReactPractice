@@ -6,6 +6,7 @@ import styles from './Pagination.module.scss';
 const Pagination = ({changePage, totalPages}) => {
 const { page } = useSelector((state) => state.catalog);
 
+
   return (
    <nav>
      <div className={styles.paginationBlock}>
@@ -19,7 +20,7 @@ const { page } = useSelector((state) => state.catalog);
     <button
       onClick={() => changePage(el + 1)}
       key={el}
-      className={`page ${page === el + 1 ? "active" : ""}`}
+      className={`page ${page === el + 1 ? styles.active : ""}`}
     >
       {el + 1}
     </button>

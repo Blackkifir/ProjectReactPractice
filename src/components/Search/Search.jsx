@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Search.module.scss';
 
-const Search = ({onChangeInput, value}) => {
+const Search = ({onChangeInput, value, clickClose}) => {
 
     return (
 <>
@@ -13,6 +13,9 @@ const Search = ({onChangeInput, value}) => {
          onChange={onChangeInput}
          placeholder='Search'
          className={styles.input}/>
+        <button
+        onClick={clickClose}
+        className={styles.close}>&times;</button>
      </div>
      </div>
      </header>
