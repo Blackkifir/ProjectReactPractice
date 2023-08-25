@@ -2,16 +2,16 @@ import React from 'react';
 import styles from './Catalog.module.scss';
 import imageReact from '../../assets/img/reactImage.svg'; 
 
-const Catalog = ({ title, price, description, time }) => {
+const Catalog = ({id, nameTitle, price, description, time }) => {
             return (
               <div className={styles.parent}>
                 <div className={styles.catalog}> 
                   <div className='block_reactImg'>
-                    <img className={styles.imgAvatar} src={imageReact}/>
+                    <img className={styles.imgAvatar} src={imageReact} alt='notFound'/>
                   </div> 
                   <div className={styles.blockDescription}>
-                      <h3>{title}</h3>
-                      <span>{title}</span>
+                      <h3>{id}</h3>
+                      <span>{nameTitle}</span>
                       <span>{price}</span>
                       <span>{description}</span>              
                   </div>          

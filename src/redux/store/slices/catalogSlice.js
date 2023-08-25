@@ -14,9 +14,14 @@ const initialState = {
 
 export const axiosCatalog = createAsyncThunk(
     'catalog/axiosCatalogStatus',
+
     async (params) => {
         const { searchValue } = params
-        const { data } = await axios.get(`https://api.escuelajs.co/api/v1/products/?title=${searchValue}`);
+        const { data } = await axios({
+            method: 'GET',
+            url: `https://dummyjson.com/products/categories/?title=${searchValue}`,
+            withCredentials: false
+        })
         return data;
     }
 );
@@ -33,7 +38,7 @@ const catalogSlice = createSlice({
         },
         setPage(state, action) {
             state.page = action.payload;
-        }
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(axiosCatalog.pending, (state) => {
@@ -57,8 +62,6 @@ const catalogSlice = createSlice({
         })
     }
 });
-
-
 
 export const { setItems, setSearchValue, setPage } = catalogSlice.actions;
 export default catalogSlice.reducer;

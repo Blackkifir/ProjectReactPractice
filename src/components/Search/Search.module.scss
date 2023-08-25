@@ -2,11 +2,13 @@
 
 .search {
     position: relative;
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }
 
-input {
-    max-width: 1308px;
-    width: 100%;
+.input {
+    width: 500px;
     height: 56px;
     box-shadow: 0px 3px 7px 0px rgba(0, 0, 0, 0.7);
     border: none;
@@ -22,6 +24,12 @@ input {
         font-size: 16px;
         line-height: 24px;
     }
+
+    &:focus {
+        transition: 1s all;
+        transition-delay: .5s;
+        width: 1308px;
+    }
 }
 
 
@@ -34,5 +42,18 @@ input {
     border: none;
     background-color: transparent;
     color: #808080;
+    cursor: pointer;
+}
+
+.logReg {
+    color: white;
+    background-color: DodgerBlue;
+    border: none;
+    border-radius: 10px;
+    width: 100px;
+    height: 30px;
+    margin-bottom: 50px;
+    box-shadow: 0px 3px 7px 0px rgba(0, 0, 0, 0.7);
+    font-family: $Roboto;
     cursor: pointer;
 }

@@ -1,0 +1,70 @@
+.form {
+
+    display: flex;
+    height: 900px;
+    align-items: center;
+    justify-content: center;
+    margin: auto auto;
+
+    div {
+        position: relative;
+        display: flex;
+        background-color: #3573cb;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 5px solid #3573cb;
+        height: 700px;
+        width: 1000px;
+        box-shadow: 0px 3px 7px 0px rgba(0, 0, 0, 0.7);
+    }
+
+    h1 {
+        margin: 0 0 50px 0;
+        color: white;
+        font-size: 50px;
+        font-family: 'Open Sans', sans-serif;
+    }
+
+    input {
+        margin-bottom: 50px;
+        height: 25px;
+        width: 300px;
+        border: none;
+        border-radius: 5px;
+        box-shadow: 0px 3px 7px 0px rgba(0, 0, 0, 0.7);
+    }
+
+    .btnRegistration {
+        background-color: #3573cb;
+        margin-top: 70px;
+        border-radius: 10px;
+        font-size: 30px;
+        border: none;
+        color: white;
+        width: 250px;
+        height: 50px;
+        cursor: pointer;
+        box-shadow: 0px 3px 7px 0px rgba(0, 0, 0, 0.7);
+        &:disabled {
+            background-color: red;
+            transition: all 1s;
+            cursor: auto;
+        }
+    }
+
+    .closeReg {
+        position: absolute;
+        top: 0;
+        right: 0;
+        border: none;
+        color: white;
+        background-color: #3573cb;
+        font-size: 40px;
+        cursor: pointer;
+    }
+}
+
+.errorColor {
+    color: red;
+}

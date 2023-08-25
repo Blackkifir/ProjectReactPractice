@@ -11,6 +11,7 @@ import Loader from '../components/Loader/Loader';
 import debounce from '../helpers/debounce'; 
 import NotFound from '../components/NotFound/NotFound';
 
+
 const Home = () => {
     //redux
     const dispatch = useDispatch();
@@ -58,6 +59,8 @@ const Home = () => {
       }
    }; 
 
+   
+
     return (
 <div className='container'>   
             <Search 
@@ -71,7 +74,7 @@ const Home = () => {
             {isLoading ? <Loader/> : ( 
             items.slice(firstContentIndex, lastContentIndex)
                  .map((obj) => <Catalog
-            key={obj.id}
+            key={obj}
             id={obj.id}
             title={obj.title}
             price={obj.price}
